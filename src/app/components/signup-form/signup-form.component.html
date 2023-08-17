@@ -1,19 +1,19 @@
 <form>
     <div class="form-group p-2">
         <label for="fullname">Fullname</label>
-        <input class="form-control" type="textbox" id="fullname" name="fullname" placeholder="Enter your fullname" />
+        <input [(ngModel)]="fullname" class="form-control" type="textbox" id="fullname" name="fullname" placeholder="Enter your fullname" />
     </div>
     <div class="form-group p-2">
         <label for="email">Email Address</label>
-        <input class="form-control" type="textbox" id="email" name="email" placeholder="Enter your email" />
+        <input [(ngModel)]="email" class="form-control" type="textbox" id="email" name="email" placeholder="Enter your email" />
     </div>
     <div class="form-group p-2">
         <label for="username">Username</label>
-        <input class="form-control" type="textbox" id="username" name="username" placeholder="Enter your username" />
+        <input [(ngModel)]="username" class="form-control" type="textbox" id="username" name="username" placeholder="Enter your username" />
     </div>
     <div class="form-group p-2">
         <label for="password">Password</label>
-        <input class="form-control" type="password" id="password" name="password" placeholder="Enter your password" />
-        <button class="btn btn-primary m-5"> Submit</button>
+        <input [(ngModel)]="password" class="form-control" type="password" id="password" name="password" placeholder="Enter your password" />
+        <button (click)="onClick()" class="btn btn-primary m-5"> Submit</button>
     </div>
 </form>

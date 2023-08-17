@@ -1,10 +1,29 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { UiService } from '../../services/ui.service';
 
 @Component({
   selector: 'app-form',
   templateUrl: './form.component.html',
-  styleUrls: ['./form.component.css']
+  styleUrls: ['./form.component.css'],
 })
-export class FormComponent {
+export class FormComponent implements OnInit {
+  showForm: boolean;
+  subscription: Subscription;
 
+  constructor(private uiService: UiService) {
+    // subscribe to the service to get notified of updates
+    this.subscription = this.uiService
+      .onToggle()
+      .subscribe((val) => (this.showForm = val));
+  }
+
+  ngOnInit(): void {}
+
+  toggleForm(): void {
+    // console.log('toggle boolean');
+    // this will change the boolean value
+    this.uiService.toggleForm();
+    console.log(this.showForm);
+  }
 }

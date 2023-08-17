@@ -6,6 +6,7 @@ import { FormComponent } from './components/form/form.component';
 import { LoginFormComponent } from './components/login-form/login-form.component';
 import { SignupFormComponent } from './components/signup-form/signup-form.component';
 import { LoginComponent } from './components/login/login.component';
+import { FormsModule } from '@angular/forms';
 import { SignupComponent } from './components/signup/signup.component';
 
 @NgModule({
@@ -18,7 +19,8 @@ import { SignupComponent } from './components/signup/signup.component';
     SignupComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
