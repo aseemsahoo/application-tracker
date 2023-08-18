@@ -1,7 +1,7 @@
 <div class="container">
   <div class="container d-flex justify-content-center" style="padding: 50px">
-    <app-login (btnClick)="toggleForm()"></app-login>
-    <app-signup (btnClick)="toggleForm()"></app-signup>
+    <app-form-button (btnClick)="toggleForm()" text="Login"></app-form-button>
+    <app-form-button (btnClick)="toggleForm()" text="Signup"></app-form-button>
   </div>
   <div class="container d-flex justify-content-center" style="">
     <app-login-form *ngIf="showForm"></app-login-form>

@@ -8,7 +8,7 @@ import { UiService } from '../../services/ui.service';
   styleUrls: ['./form.component.css'],
 })
 export class FormComponent implements OnInit {
-  showForm: boolean;
+  showForm: boolean = true;
   subscription: Subscription;
 
   constructor(private uiService: UiService) {

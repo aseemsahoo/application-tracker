@@ -5,10 +5,9 @@ import { AppComponent } from './app.component';
 import { FormComponent } from './components/form/form.component';
 import { LoginFormComponent } from './components/login-form/login-form.component';
 import { SignupFormComponent } from './components/signup-form/signup-form.component';
-import { LoginComponent } from './components/login/login.component';
 import { FormsModule } from '@angular/forms';
-import { SignupComponent } from './components/signup/signup.component';
 import { HttpClientModule } from '@angular/common/http';
+import { FormButtonComponent } from './components/form-button/form-button.component';
 
 @NgModule({
   declarations: [
@@ -16,8 +15,7 @@ import { HttpClientModule } from '@angular/common/http';
     FormComponent,
     LoginFormComponent,
     SignupFormComponent,
-    LoginComponent,
-    SignupComponent,
+    FormButtonComponent,
   ],
   imports: [BrowserModule, FormsModule, HttpClientModule],
   providers: [],

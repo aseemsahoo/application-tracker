@@ -9,13 +9,16 @@ import { UserService } from 'src/app/services/user.service';
 export class LoginFormComponent implements OnInit {
   username: string;
   password: string;
-  constructor(private userService: UserService) {}
-  ngOnInit(): void {}
+  posts: any;
+
+  constructor(private userService: UserService) { }
+
+  ngOnInit(): void { }
+
   onClick(): void {
-    this.userService.login({
-      username: this.username,
-      password: this.password,
-    });
-    // console.log(`${this.username} and ${this.password}`);
+    this.userService.login(this.username, this.password).subscribe((response: any) => {
+      this.posts = response;
+      console.log(this.posts);
+    })
   }
 }

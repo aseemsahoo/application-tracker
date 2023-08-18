@@ -1,32 +1,31 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Tmp } from '../temp';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserService {
-  url: string = 'http://localhost:3001/login';
+  url: string = 'http://localhost:3000/login';
   constructor(private http: HttpClient) {}
 
-  login(data: { username: string; password: string }) {
-    const tt: Tmp = {
-      username: data.username,
-      password: data.password,
-    };
+  login(username : string, password : string) : Observable<any> {
     const body = {
-      username: data.username,
-      password: data.password,
+      'username': username,
+      'password': password,
     };
-    console.log('REACH 1');
+    let res : any;
+    return this.http.post(this.url, body);
+    
+    // this.url = "http://localhost:3000/profile";
 
-    this.http.post<any>(this.url, body).subscribe((data) => {
-      console.log(data);
-    });
+    // const token = localStorage.getItem('token');
+    // const headers = new HttpHeaders({
+    //   'Authorization': `${token}`
+    // });
 
-    console.log('REACH 2');
-    // this.http.get(`${this.url}`, tt).subscribe((result) => {
-    //   console.log(result);
+    // this.http.get(this.url, { headers: headers }).subscribe((data) => {
+    //   console.log(data);
     // });
   }
 }
