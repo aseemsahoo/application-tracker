@@ -5,7 +5,7 @@ import { AppComponent } from './app.component';
 import { FormComponent } from './components/form/form.component';
 import { LoginFormComponent } from './components/login-form/login-form.component';
 import { SignupFormComponent } from './components/signup-form/signup-form.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { FormButtonComponent } from './components/form-button/form-button.component';
 
@@ -17,7 +17,7 @@ import { FormButtonComponent } from './components/form-button/form-button.compon
     SignupFormComponent,
     FormButtonComponent,
   ],
-  imports: [BrowserModule, FormsModule, HttpClientModule],
+  imports: [BrowserModule, FormsModule, ReactiveFormsModule, HttpClientModule],
   providers: [],
   bootstrap: [AppComponent],
 })

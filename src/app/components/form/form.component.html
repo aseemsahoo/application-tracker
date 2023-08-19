@@ -3,7 +3,7 @@
     <app-form-button (btnClick)="toggleForm()" text="Login"></app-form-button>
     <app-form-button (btnClick)="toggleForm()" text="Signup"></app-form-button>
   </div>
-  <div class="container d-flex justify-content-center" style="">
+  <div class="container d-flex justify-content-center">
     <app-login-form *ngIf="showForm"></app-login-form>
     <app-signup-form *ngIf="!showForm"></app-signup-form>
   </div>

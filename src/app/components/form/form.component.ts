@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { UiService } from '../../services/ui.service';
 
@@ -7,7 +7,7 @@ import { UiService } from '../../services/ui.service';
   templateUrl: './form.component.html',
   styleUrls: ['./form.component.css'],
 })
-export class FormComponent implements OnInit {
+export class FormComponent implements OnInit, OnDestroy {
   showForm: boolean = true;
   subscription: Subscription;
 
@@ -25,5 +25,12 @@ export class FormComponent implements OnInit {
     // this will change the boolean value
     this.uiService.toggleForm();
     console.log(this.showForm);
+  }
+  ngOnDestroy(): void {
+    if(this.subscription)
+    {
+      this.subscription.unsubscribe();
+    }
+
   }
 }
