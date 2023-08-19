@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute, ActivationEnd, Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -9,16 +10,18 @@ import { UserService } from 'src/app/services/user.service';
 export class LoginFormComponent implements OnInit {
   username: string;
   password: string;
-  posts: any;
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService, private router: Router) { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    
+   }
 
   onClick(): void {
     this.userService.login(this.username, this.password).subscribe((response: any) => {
-      this.posts = response;
-      console.log(this.posts);
+      // receive token + id from /login and use this id to load home page
+      const id = 2;
+      this.router.navigate(['home', id]);
     })
   }
 }

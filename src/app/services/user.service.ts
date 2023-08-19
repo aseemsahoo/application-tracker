@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class UserService {
-  url: string = 'http://localhost:3000/login';
+  url: string = 'http://localhost:3000';
   constructor(private http: HttpClient) {}
 
   login(username : string, password : string) : Observable<any> {
@@ -14,18 +14,22 @@ export class UserService {
       'username': username,
       'password': password,
     };
-    let res : any;
-    return this.http.post(this.url, body);
+    this.http.post(`${this.url}/login`, body).subscribe((data : any) => {
+      console.log('token');
+      console.log(data.token);
+      localStorage.setItem('token', data.token);
+    });
     
-    // this.url = "http://localhost:3000/profile";
-
-    // const token = localStorage.getItem('token');
-    // const headers = new HttpHeaders({
-    //   'Authorization': `${token}`
-    // });
-
-    // this.http.get(this.url, { headers: headers }).subscribe((data) => {
-    //   console.log(data);
-    // });
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders({
+      'Authorization': `${token}`
+    });
+    return this.http.get(`${this.url}/profile`, { headers: headers });
   }
+  
+  data() : Observable<any>
+  {
+    return this.http.get(`${this.url}/data`);
+  }
+
 }

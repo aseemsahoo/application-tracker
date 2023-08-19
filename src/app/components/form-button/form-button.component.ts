@@ -1,17 +1,28 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-form-button',
   templateUrl: './form-button.component.html',
   styleUrls: ['./form-button.component.css']
 })
-export class FormButtonComponent {
+export class FormButtonComponent implements OnInit {
+  constructor(private router : Router) {}
+  ngOnInit(): void {
+  }
   @Input() text : string;
-  
-  @Output() btnClick : EventEmitter<void> = new EventEmitter();
+
   onClick() : void 
   {
-    this.btnClick.emit();
+    console.log(this.text);
+    if(this.text === 'Login')
+    {
+      this.router.navigate(['login']);
+    }
+    else
+    {
+      this.router.navigate(['signup']) ;
+    }
   }
 
 }

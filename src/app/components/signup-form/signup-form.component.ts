@@ -13,10 +13,6 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./signup-form.component.css'],
 })
 export class SignupFormComponent implements OnInit {
-  // fullname: string;
-  // email: string;
-  // username: string;
-  // password: string;
   signupForm: FormGroup;
 
   constructor(private fb: FormBuilder, private userService: UserService) {}
