@@ -11,9 +11,11 @@ export class FormButtonComponent implements OnInit {
   ngOnInit(): void {
   }
   @Input() text : string;
+  isSelected : boolean = false;
 
   onClick() : void 
   {
+    this.isSelected = !this.isSelected;
     console.log(this.text);
     if(this.text === 'Login')
     {

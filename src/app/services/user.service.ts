@@ -9,7 +9,7 @@ import { CookieService } from './cookie.service';
 })
 export class UserService 
 {
-  userData = new BehaviorSubject<User>({
+  userData = new BehaviorSubject<any>({
     username: '',
     password: '',
   });
@@ -34,6 +34,9 @@ export class UserService
     );
   }
 
+  logout() : void {
+    this.userData.next(null);
+  }
     // return this.http.post(`${this.url}/login`, data);
   profile() : Observable<any>
   {

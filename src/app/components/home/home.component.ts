@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { map, take } from 'rxjs';
 import { UserService } from 'src/app/services/user.service';
 import { User } from 'src/app/User';
 
@@ -11,6 +12,7 @@ import { User } from 'src/app/User';
 export class HomeComponent implements OnInit{
   id : number;
   posts : User[] = [];
+  isLogged : boolean = false;
   constructor(private userService: UserService, private route : ActivatedRoute)
   {  }
 
@@ -24,6 +26,7 @@ export class HomeComponent implements OnInit{
       console.log("subscribed changes in home: ");
       console.log(user);
       this.posts.push(user);
+      this.isLogged = user ? true : false;
       // this.posts.push(...this.posts, user);
     })
   }
@@ -31,5 +34,8 @@ export class HomeComponent implements OnInit{
     this.userService.profile().subscribe((data : any) => {
       this.posts.push(data);
     })
+  }
+  onLogout() : void {
+    this.userService.logout();
   }
 }
