@@ -23,9 +23,9 @@ export class LoginFormComponent implements OnInit {
   }
 
   onClick(): void {
-    this.userService.login(this.username, this.password).subscribe((response: any) => {
+    this.userService.login(this.loginForm.value).subscribe((response: any) => {
       // receive token + id from /login and use this id to load home page
-      console.log(this.loginForm.value || JSON);
+      console.log(response);
       const id = 2;
       this.router.navigate(['home', id]);
     })

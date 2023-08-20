@@ -6,11 +6,12 @@ import { FormComponent } from './components/form/form.component';
 import { LoginFormComponent } from './components/login-form/login-form.component';
 import { SignupFormComponent } from './components/signup-form/signup-form.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HttpRequest, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormButtonComponent } from './components/form-button/form-button.component';
 import { HomeComponent } from './components/home/home.component';
 import { appRoutes } from './app.routes';
 import { NavComponent } from './components/nav/nav.component';
+import { RequestInterceptor } from './config/request.interceptor';
 
 
 
@@ -25,7 +26,14 @@ import { NavComponent } from './components/nav/nav.component';
     NavComponent,
   ],
   imports: [BrowserModule, RouterModule.forRoot(appRoutes), FormsModule, ReactiveFormsModule, HttpClientModule],
-  providers: [],
+  providers:
+   [
+    {
+    provide: HTTP_INTERCEPTORS,
+    useClass: RequestInterceptor,
+    multi: true
+  }
+],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
