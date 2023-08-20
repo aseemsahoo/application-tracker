@@ -1,10 +1,9 @@
-<div class="container">
-  <div class="container d-flex justify-content-center" style="padding: 50px">
-    <app-login (btnClick)="toggleForm()"></app-login>
-    <app-signup (btnClick)="toggleForm()"></app-signup>
+<div class="container-fluid w-75 justify-content-center">
+  <div class="container w-50 mt-4 mb-4 text-center">
+    <app-form-button text="Login"></app-form-button>
+    <app-form-button text="Signup"></app-form-button>
   </div>
-  <div class="container d-flex justify-content-center" style="">
-    <app-login-form *ngIf="showForm"></app-login-form>
-    <app-signup-form *ngIf="!showForm"></app-signup-form>
+  <div class="w-50 mb-5 mx-auto">
+    <router-outlet></router-outlet>
   </div>
 </div>
