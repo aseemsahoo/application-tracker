@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, ActivationEnd, Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 
@@ -10,16 +11,21 @@ import { UserService } from 'src/app/services/user.service';
 export class LoginFormComponent implements OnInit {
   username: string;
   password: string;
+  loginForm : FormGroup;
 
-  constructor(private userService: UserService, private router: Router) { }
+  constructor(private userService: UserService, private router: Router, private fb: FormBuilder) { }
 
   ngOnInit(): void {
-    
-   }
+    this.loginForm = this.fb.group({
+      username : ['', [Validators.required]],
+      password : ['', [Validators.required]]
+    });
+  }
 
   onClick(): void {
     this.userService.login(this.username, this.password).subscribe((response: any) => {
       // receive token + id from /login and use this id to load home page
+      console.log(this.loginForm.value || JSON);
       const id = 2;
       this.router.navigate(['home', id]);
     })

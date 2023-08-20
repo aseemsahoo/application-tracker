@@ -1,27 +1,25 @@
-<form class="container bg-light">
+<form class="container bg-light" [formGroup]="loginForm" (ngSubmit)="onClick()">
   <div class="form-group p-3 pt-4">
     <label for="username">Username</label>
     <input
-      [(ngModel)]="username"
+      formControlName="username"
       class="form-control"
       type="textbox"
-      name="username"
       placeholder="Enter your username"
     />
+    <small *ngIf="loginForm.controls['username'].invalid" class="text text-danger"> Please enter the username</small>
   </div>
   <div class="form-group p-3">
     <label for="password">Password</label>
     <input
-      [(ngModel)]="password"
+      formControlName="password"
       class="form-control"
       type="password"
-      name="password"
       placeholder="Enter your password"
     />
+    <small *ngIf="loginForm.controls['password'].invalid" class="text text-danger"> Please enter the password</small>
   </div>
   <div class="text-center mt-4 pb-4">
-    <button type="button" (click)="onClick()" class="btn btn-primary w-50">
-      Submit
-    </button>
+    <button [disabled]="loginForm.invalid" type="button" class="btn btn-primary w-50"> Submit </button>
   </div>
 </form>
