@@ -17,6 +17,7 @@ export class CookieService {
   }
   
   setToken(token: string) : void {
+    console.log('token is set');
     localStorage.setItem('token', token);
   }
 }

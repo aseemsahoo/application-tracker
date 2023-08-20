@@ -4,15 +4,17 @@ import {
   HttpHandler,
   HttpEvent,
   HttpInterceptor,
-  HttpHeaders
+  HttpHeaders,
+  HttpErrorResponse
 } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { catchError, Observable, throwError } from 'rxjs';
 import { CookieService } from '../services/cookie.service';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class RequestInterceptor implements HttpInterceptor {
 
-  constructor(private cookie : CookieService) {}
+  constructor(private router : Router, private cookie : CookieService) {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> 
   {
@@ -25,6 +27,15 @@ export class RequestInterceptor implements HttpInterceptor {
         });
       return next.handle(newRequest);
     }
-    return next.handle(request);
+    return next.handle(request).pipe(
+      catchError((err : any) => {
+        if(err instanceof HttpErrorResponse)
+        {
+          console.log('Err : ' + err.status);
+          this.router.navigate(['signup']);
+        }
+        return throwError(() => new Error("Some other throwError"));
+      })
+    );
   }
 }

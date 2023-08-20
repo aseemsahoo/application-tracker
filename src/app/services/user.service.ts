@@ -1,31 +1,46 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, Subject, map, catchError, BehaviorSubject } from 'rxjs';
+import { User } from '../User';
 import { CookieService } from './cookie.service';
 
 @Injectable({
   providedIn: 'root',
 })
-export class UserService {
+export class UserService 
+{
+  userData = new BehaviorSubject<User>({
+    username: '',
+    password: '',
+  });
   url: string = 'http://localhost:3000';
-  constructor(private http: HttpClient, private cookie : CookieService) {}
 
-  login(data : any) : Observable<any> {
-    this.http.post(`${this.url}/login`, data).subscribe((data : any) => {
-      console.log(data.token);
-      this.cookie.setToken(data.token);
-    });
-    
-    // const token = this.cookie.getToken();
-    // const headers = new HttpHeaders({
-    //   'Authorization': `${token}`
-    // });
+  constructor(private http: HttpClient, private cookie : CookieService) {}
+  
+  login(data : any) : Observable<any>
+  {
+    return this.http.post(`${this.url}/login`, data).pipe(
+      map((data : any) => 
+        {
+        // Perform your operations on the response data here
+        this.cookie.setToken(data.token);
+        return data;
+      }),
+      catchError((error : any) => 
+      {
+        console.error('API Error:', error);
+        throw error;
+      })
+    );
+  }
+
+    // return this.http.post(`${this.url}/login`, data);
+  profile() : Observable<any>
+  {
     return this.http.get(`${this.url}/profile`);
   }
-  
-  // data() : Observable<any>
-  // {
-  //   return this.http.get(`${this.url}/data`);
-  // }
-
+  saveUser(user: User) : void
+  {
+    this.userData.next(user);
+  }
 }

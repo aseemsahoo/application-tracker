@@ -1,23 +1,26 @@
+
 <form class="container bg-light" [formGroup]="loginForm" (ngSubmit)="onClick()">
   <div class="form-group p-3 pt-4">
     <label for="username">Username</label>
     <input
+      [ngClass]="{'is-invalid' : submitted && loginForm.controls['username'].errors}"
       formControlName="username"
       class="form-control"
       type="textbox"
       placeholder="Enter your username"
     />
-    <small *ngIf="loginForm.controls['username'].invalid" class="text text-danger"> Please enter the username</small>
+    <!-- <small *ngIf="submitted && loginForm.controls['username'].errors" class="text text-danger"> Please enter the username</small> -->
   </div>
   <div class="form-group p-3">
     <label for="password">Password</label>
     <input
+      [ngClass]="{'is-invalid' : submitted && loginForm.controls['password'].errors}"
       formControlName="password"
       class="form-control"
       type="password"
       placeholder="Enter your password"
     />
-    <small *ngIf="loginForm.controls['password'].invalid" class="text text-danger"> Please enter the password</small>
+    <!-- <small *ngIf="loginForm.controls['password'].invalid" class="text text-danger"> Please enter the password</small> -->
   </div>
   <div class="text-center mt-4 pb-4">
     <button class="btn btn-primary w-50"> Submit </button>

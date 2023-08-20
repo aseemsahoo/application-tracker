@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, ActivationEnd, Router } from '@angular/router';
+import { switchMap } from 'rxjs';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -9,25 +10,48 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./login-form.component.css'],
 })
 export class LoginFormComponent implements OnInit {
-  username: string;
-  password: string;
   loginForm : FormGroup;
+  submitted : boolean = false;
 
   constructor(private userService: UserService, private router: Router, private fb: FormBuilder) { }
 
   ngOnInit(): void {
-    this.loginForm = this.fb.group({
-      username : ['', [Validators.required]],
-      password : ['', [Validators.required]]
+    this.loginForm = new FormGroup({
+      username : new FormControl('', [Validators.required]),
+      password : new FormControl('', [Validators.required]),
     });
   }
 
-  onClick(): void {
-    this.userService.login(this.loginForm.value).subscribe((response: any) => {
+  onClick(): void 
+  {
+    this.submitted = true;
+    
+    if(this.loginForm.invalid)
+    {
+      return ;
+    }
+    let userData = this.userService.login(this.loginForm.value)
+    .pipe(switchMap(() => this.userService.profile()));
+
+    // save it to userData in service, which is a Subject
+    userData.subscribe({next : (data : any) => {
+      console.log('userData in Login')
+      console.log(data);
+      this.userService.saveUser(data);
+      this.router.navigate(['home', 23]);
+    }})
+
+    // this.userService.login(this.loginForm.value)
+    // .subscribe({
+    //   next: (res) =>{
+    //     console.log(res);
+    //     this.router.navigate(['home', 2]);
+    //   },
+    //   error: (err) => {
+    //     console.log(err);
+    //     alert(err.status);
+    //   }
+    // })
       // receive token + id from /login and use this id to load home page
-      console.log(response);
-      const id = 2;
-      this.router.navigate(['home', id]);
-    })
   }
 }
