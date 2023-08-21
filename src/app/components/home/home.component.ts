@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { KeycloakService } from 'keycloak-angular';
 import { map, take } from 'rxjs';
 import { UserService } from 'src/app/services/user.service';
 import { User } from 'src/app/User';
@@ -10,16 +11,18 @@ import { User } from 'src/app/User';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit{
-  id : number;
+  id : number = 0;
   posts : User[] = [];
+  user : string;
   isLogged : boolean = false;
-  constructor(private userService: UserService, private route : ActivatedRoute)
+  constructor(private userService: UserService, private keycloakService :KeycloakService)
   {  }
 
   ngOnInit(): void 
   {
     // get id from router
-    this.route.params.subscribe( params => { this.id = params['id']; });
+    // this.route.params.subscribe( params => { this.id = params['id']; });
+    this.user = this.keycloakService.getUsername();
 
     // get notified of change in userData
     this.userService.userData.subscribe((user : User) => {
@@ -35,7 +38,12 @@ export class HomeComponent implements OnInit{
       this.posts.push(data);
     })
   }
+  onLogin(): void {
+    this.keycloakService.login();
+  }
   onLogout() : void {
-    this.userService.logout();
+    // this.userService.logout(); dummy function hai for now
+    console.log("on Logout clicked")
+    this.keycloakService.logout();
   }
 }

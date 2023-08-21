@@ -1,4 +1,4 @@
-<h1>hello {{id}}</h1>
+<h1>hello {{user}}</h1>
 
 <div class="container-fluid text-center w-75 h-50" style="border:1px solid #cecece; height: auto; min-height: 50%;">
     <table class="table">
@@ -17,5 +17,6 @@
           </tr>
         </tbody>
       </table>
-      <button type="button" (click)="onClick()"> Add </button>
+      <button (click)="onLogin()"> Login to Keycloak </button>
+      <button (click)="onLogout()"> LogOut from Keycloak </button>
 </div>
