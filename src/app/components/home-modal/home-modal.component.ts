@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { categoryList } from 'src/app/category';
 
 @Component({
   selector: 'app-home-modal',
@@ -9,16 +10,11 @@ import { Router } from '@angular/router';
 })
 export class HomeModalComponent implements OnInit {
   addJobForm: FormGroup;
-  categoryList: string[] = [
-    'Wishlist',
-    'Applied',
-    'Test',
-    'Interview',
-    'Offered',
-  ];
+  cgList: string[];
   submitted: boolean = false;
   constructor(private router: Router) {}
   ngOnInit(): void {
+    this.cgList = categoryList;
     this.addJobForm = new FormGroup({
       company: new FormControl('', [Validators.required]),
       title: new FormControl('', [Validators.required]),

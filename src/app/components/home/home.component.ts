@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { KeycloakService } from 'keycloak-angular';
 import { map, take } from 'rxjs';
+import { categoryList } from 'src/app/category';
 import { UserService } from 'src/app/services/user.service';
 import { User } from 'src/app/User';
 
@@ -12,6 +13,7 @@ import { User } from 'src/app/User';
 })
 export class HomeComponent implements OnInit {
   id: number = 0;
+  cgList: string[];
   posts: User[] = [];
   user: any;
   isLogged: boolean = false;
@@ -21,6 +23,7 @@ export class HomeComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.cgList = categoryList;
     // get id from router
     // this.route.params.subscribe( params => { this.id = params['id']; });
     this.user = this.keycloakService.getUsername();
