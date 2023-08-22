@@ -1,0 +1,94 @@
+<div class="modal" id="myModal" style="display: block">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Add Job</h4>
+      </div>
+
+      <!-- Modal body -->
+      <form
+        class="container bg-light"
+        [formGroup]="addJobForm"
+        (ngSubmit)="onSubmit()"
+      >
+        <div class="row">
+          <div class="col">
+            <div class="form-group p-3 d-block">
+              <label for="company">Company</label>
+              <input
+                class="form-control"
+                formControlName="company"
+                type="textbox"
+              />
+              <!-- <small *ngIf="submitted && loginForm.controls['username'].errors" class="text text-danger"> Please enter the username</small> -->
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group p-3 d-block">
+              <label for="title">Job Title</label>
+              <input
+                class="form-control"
+                formControlName="title"
+                type="textbox"
+              />
+              <!-- <small *ngIf="submitted && loginForm.controls['username'].errors" class="text text-danger"> Please enter the username</small> -->
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <div class="form-group p-3 d-block">
+              <label for="link">Job Description link</label>
+              <input
+                class="form-control"
+                formControlName="link"
+                type="textbox"
+              />
+              <!-- <small *ngIf="submitted && loginForm.controls['username'].errors" class="text text-danger"> Please enter the username</small> -->
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group p-3 d-block">
+              <label for="category">Category</label>
+              <select formControlName="category" class="form-control">
+                <option disabled [defaultSelected]="true">
+                  Select Category
+                </option>
+                <option *ngFor="let category of categoryList">
+                  {{ category }}
+                </option>
+              </select>
+              <!-- <small *ngIf="submitted && loginForm.controls['username'].errors" class="text text-danger"> Please enter the username</small> -->
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group p-3">
+          <label for="comments">Comments:</label>
+          <textarea
+            class="form-control"
+            rows="5"
+            formControlName="comments"
+            id="comment"
+            name="text"
+          ></textarea>
+          <!-- <small *ngIf="loginForm.controls['password'].invalid" class="text text-danger"> Please enter the password</small> -->
+        </div>
+
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button
+            class="btn btn-danger"
+            (click)="closeModal()"
+            data-bs-dismiss="modal"
+          >
+            Close
+          </button>
+          <button class="btn btn-primary w-50">Submit</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

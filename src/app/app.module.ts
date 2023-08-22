@@ -6,13 +6,18 @@ import { FormComponent } from './components/form/form.component';
 import { LoginFormComponent } from './components/login-form/login-form.component';
 import { SignupFormComponent } from './components/signup-form/signup-form.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule, HttpRequest, HTTP_INTERCEPTORS } from '@angular/common/http';
+import {
+  HttpClientModule,
+  HttpRequest,
+  HTTP_INTERCEPTORS,
+} from '@angular/common/http';
 import { FormButtonComponent } from './components/form-button/form-button.component';
 import { HomeComponent } from './components/home/home.component';
 import { appRoutes } from './app.routes';
 import { NavComponent } from './components/nav/nav.component';
 import { RequestInterceptor } from './config/request.interceptor';
 import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
+import { HomeModalComponent } from './components/home-modal/home-modal.component';
 
 function initializeKeycloak(keycloak: KeycloakService) {
   return () =>
@@ -20,16 +25,16 @@ function initializeKeycloak(keycloak: KeycloakService) {
       config: {
         url: 'http://localhost:8080',
         realm: 'application-realm',
-        clientId: 'application-client'
+        clientId: 'application-client',
       },
       initOptions: {
         onLoad: 'check-sso',
-        checkLoginIframe : true,
-        checkLoginIframeInterval : 25,
+        checkLoginIframe: true,
+        checkLoginIframeInterval: 25,
         silentCheckSsoRedirectUri:
-          window.location.origin + '/assets/silent-check-sso.html'
+          window.location.origin + '/assets/silent-check-sso.html',
       },
-      loadUserProfileAtStartUp : true
+      loadUserProfileAtStartUp: true,
     });
 }
 
@@ -42,23 +47,30 @@ function initializeKeycloak(keycloak: KeycloakService) {
     FormButtonComponent,
     HomeComponent,
     NavComponent,
+    HomeModalComponent,
   ],
-  imports: [BrowserModule, RouterModule.forRoot(appRoutes), FormsModule, ReactiveFormsModule, HttpClientModule, KeycloakAngularModule],
-  providers:
-   [
+  imports: [
+    BrowserModule,
+    RouterModule.forRoot(appRoutes),
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    KeycloakAngularModule,
+  ],
+  providers: [
     KeycloakService,
     {
-    provide: HTTP_INTERCEPTORS,
-    useClass: RequestInterceptor,
-    multi: true
-  },
-  {
-    provide: APP_INITIALIZER,
-    useFactory: initializeKeycloak,
-    multi: true,
-    deps: [KeycloakService]
-  }
-],
+      provide: HTTP_INTERCEPTORS,
+      useClass: RequestInterceptor,
+      multi: true,
+    },
+    {
+      provide: APP_INITIALIZER,
+      useFactory: initializeKeycloak,
+      multi: true,
+      deps: [KeycloakService],
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

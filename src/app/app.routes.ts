@@ -4,6 +4,7 @@ import { HomeComponent } from './components/home/home.component';
 import { LoginFormComponent } from './components/login-form/login-form.component';
 import { SignupFormComponent } from './components/signup-form/signup-form.component';
 import { AuthGuard } from './config/keycloak.guard';
+import { HomeModalComponent } from './components/home-modal/home-modal.component';
 
 export const appRoutes: Routes = [
   {
@@ -16,8 +17,9 @@ export const appRoutes: Routes = [
     ],
   },
   {
-    path: 'home', 
+    path: 'home',
     component: HomeComponent,
+    children: [{ path: 'add', component: HomeModalComponent }],
   },
   { path: '**', redirectTo: '', pathMatch: 'full' },
 ];

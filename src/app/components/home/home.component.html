@@ -1,22 +1,44 @@
-<h1>hello {{user}}</h1>
-
-<div class="container-fluid text-center w-75 h-50" style="border:1px solid #cecece; height: auto; min-height: 50%;">
-    <table class="table">
-        <thead>
-          <tr>
-            <!-- <th >id</th> -->
-            <th >username</th>
-            <th >password</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let item of posts">
-            <!-- <th> {{item.id}}</th> -->
-            <td>{{item.username}}</td>
-            <td>{{item.password}}</td>
-          </tr>
-        </tbody>
-      </table>
-      <button (click)="onLogin()"> Login to Keycloak </button>
-      <button (click)="onLogout()"> LogOut from Keycloak </button>
+<div class="container border m-5 p-4 mx-auto d-flex justify-content-between">
+  <h1>Hello {{ user }}</h1>
+  <button class="btn btn-warning btn-lg btn-block" (click)="openModal()">
+    Add
+  </button>
 </div>
+
+<div
+  class="container-fluid text-center w-75 h-50"
+  style="border: 1px solid #cecece; height: auto; min-height: 50%"
+>
+  <table class="table">
+    <thead>
+      <tr>
+        <!-- <th >id</th> -->
+        <th>username</th>
+        <th>password</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of posts">
+        <!-- <th> {{item.id}}</th> -->
+        <td>{{ item.username }}</td>
+        <td>{{ item.password }}</td>
+      </tr>
+    </tbody>
+  </table>
+  <button
+    class="btn btn-warning btn-lg btn-block m-3"
+    [disabled]="user"
+    (click)="onLogin()"
+  >
+    Login to Keycloak
+  </button>
+  <button
+    class="btn btn-warning btn-lg btn-block m-3"
+    [disabled]="!user"
+    (click)="onLogout()"
+  >
+    LogOut from Keycloak
+  </button>
+</div>
+
+<router-outlet></router-outlet>
