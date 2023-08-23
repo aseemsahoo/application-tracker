@@ -15,6 +15,7 @@ import { RequestInterceptor } from './config/request.interceptor';
 import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
 import { HomeModalComponent } from './components/home-modal/home-modal.component';
 import { CategoryComponent } from './components/category/category.component';
+import { JobComponent } from './components/job/job.component';
 
 function initializeKeycloak(keycloak: KeycloakService) {
   return () =>
@@ -46,6 +47,7 @@ function initializeKeycloak(keycloak: KeycloakService) {
     NavComponent,
     HomeModalComponent,
     CategoryComponent,
+    JobComponent,
   ],
   imports: [
     BrowserModule,

@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { KeycloakService } from 'keycloak-angular';
 import { map, take } from 'rxjs';
 import { categoryList } from 'src/app/category';
+import { jobList } from 'src/app/jobs';
 import { UserService } from 'src/app/services/user.service';
 import { User } from 'src/app/User';
 
@@ -12,9 +13,10 @@ import { User } from 'src/app/User';
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
-  id: number = 0;
+  // id: number = 0;
   cgList: string[];
-  posts: User[] = [];
+  // posts: User[] = [];
+  jobList: any;
   user: any;
   isLogged: boolean = false;
   constructor(
@@ -24,6 +26,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.cgList = categoryList;
+    // this.jobList = jobList;
     // get id from router
     // this.route.params.subscribe( params => { this.id = params['id']; });
     this.user = this.keycloakService.getUsername();

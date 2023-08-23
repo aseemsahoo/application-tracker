@@ -11,7 +11,9 @@
 >
   <div class="row">
     <div class="col" *ngFor="let category of cgList">
-      <app-category [category]="category"></app-category>
+      <div class="container border m-2 p-2 mx-auto d-flex">
+        <app-category [category]="category"></app-category>
+      </div>
     </div>
   </div>
   <!-- <table class="table">

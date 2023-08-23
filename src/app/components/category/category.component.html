@@ -1,1 +1,12 @@
-<p>{{ category }}</p>
+<ng-container *ngFor="let categoryItem of jobList">
+  <ng-container *ngIf="categoryItem.stageName === category">
+    <div class="d-block">
+      <p>{{ category }}</p>
+    </div>
+    <ng-container *ngFor="let job of categoryItem.jobIdentifiers">
+      <div class="border m-2 p-2">
+        <app-job [company]="job"></app-job>
+      </div>
+    </ng-container>
+  </ng-container>
+</ng-container>
