@@ -32,20 +32,6 @@
       </tr>
     </tbody>
   </table> -->
-  <button
-    class="btn btn-warning btn-lg btn-block m-3"
-    [disabled]="user"
-    (click)="onLogin()"
-  >
-    Login to Keycloak
-  </button>
-  <button
-    class="btn btn-warning btn-lg btn-block m-3"
-    [disabled]="!user"
-    (click)="onLogout()"
-  >
-    LogOut from Keycloak
-  </button>
 </div>
 
 <router-outlet></router-outlet>

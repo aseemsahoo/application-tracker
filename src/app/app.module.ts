@@ -12,30 +12,10 @@ import { HomeComponent } from './components/home/home.component';
 import { appRoutes } from './app.routes';
 import { NavComponent } from './components/nav/nav.component';
 import { RequestInterceptor } from './config/request.interceptor';
-import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
 import { HomeModalComponent } from './components/home-modal/home-modal.component';
 import { CategoryComponent } from './components/category/category.component';
 import { JobComponent } from './components/job/job.component';
 import { JobModalComponent } from './components/job-modal/job-modal.component';
-
-function initializeKeycloak(keycloak: KeycloakService) {
-  return () =>
-    keycloak.init({
-      config: {
-        url: 'http://localhost:8080',
-        realm: 'application-realm',
-        clientId: 'application-client',
-      },
-      initOptions: {
-        onLoad: 'check-sso',
-        checkLoginIframe: true,
-        checkLoginIframeInterval: 25,
-        silentCheckSsoRedirectUri:
-          window.location.origin + '/assets/silent-check-sso.html',
-      },
-      loadUserProfileAtStartUp: true,
-    });
-}
 
 @NgModule({
   declarations: [
@@ -57,20 +37,12 @@ function initializeKeycloak(keycloak: KeycloakService) {
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    KeycloakAngularModule,
   ],
   providers: [
-    KeycloakService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: RequestInterceptor,
       multi: true,
-    },
-    {
-      provide: APP_INITIALIZER,
-      useFactory: initializeKeycloak,
-      multi: true,
-      deps: [KeycloakService],
     },
   ],
   bootstrap: [AppComponent],

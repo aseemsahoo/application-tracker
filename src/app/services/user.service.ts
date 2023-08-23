@@ -30,9 +30,11 @@ export class UserService {
     );
   }
 
+  // in progress
   logout(): void {
     this.userData.next(null);
   }
+
   // return this.http.post(`${this.url}/login`, data);
   profile(): Observable<any> {
     return this.http.get(`${this.url}/profile`);
