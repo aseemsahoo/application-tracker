@@ -16,6 +16,7 @@ import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
 import { HomeModalComponent } from './components/home-modal/home-modal.component';
 import { CategoryComponent } from './components/category/category.component';
 import { JobComponent } from './components/job/job.component';
+import { JobModalComponent } from './components/job-modal/job-modal.component';
 
 function initializeKeycloak(keycloak: KeycloakService) {
   return () =>
@@ -48,6 +49,7 @@ function initializeKeycloak(keycloak: KeycloakService) {
     HomeModalComponent,
     CategoryComponent,
     JobComponent,
+    JobModalComponent,
   ],
   imports: [
     BrowserModule,

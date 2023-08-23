@@ -5,6 +5,7 @@ import { LoginFormComponent } from './components/login-form/login-form.component
 import { SignupFormComponent } from './components/signup-form/signup-form.component';
 import { AuthGuard } from './config/keycloak.guard';
 import { HomeModalComponent } from './components/home-modal/home-modal.component';
+import { JobModalComponent } from './components/job-modal/job-modal.component';
 
 export const appRoutes: Routes = [
   {
@@ -19,7 +20,10 @@ export const appRoutes: Routes = [
   {
     path: 'home',
     component: HomeComponent,
-    children: [{ path: 'add', component: HomeModalComponent }],
+    children: [
+      { path: 'add', component: HomeModalComponent },
+      { path: 'edit', component: JobModalComponent },
+    ],
   },
   { path: '**', redirectTo: '', pathMatch: 'full' },
 ];

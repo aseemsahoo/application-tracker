@@ -3,7 +3,8 @@
     <div class="modal-content">
       <!-- Modal Header -->
       <div class="header p-3 bg-light">
-        <h4 class="modal-title">Add Job</h4>
+        <h4 class="modal-title" style="font-size: xx-large">{{ company }}</h4>
+        <h5 class="modal-title">Job Info</h5>
       </div>
 
       <!-- Modal body -->
@@ -56,6 +57,31 @@
                   {{ category }}
                 </option>
               </select>
+              <!-- <small *ngIf="submitted && loginForm.controls['username'].errors" class="text text-danger"> Please enter the username</small> -->
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <div class="form-group p-3 d-block">
+              <label for="salary">Salary</label>
+              <input
+                class="form-control"
+                formControlName="salary"
+                type="textbox"
+              />
+              <!-- <small *ngIf="submitted && loginForm.controls['username'].errors" class="text text-danger"> Please enter the username</small> -->
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group p-3 d-block">
+              <label for="deadline"> Deadline </label>
+              <input
+                class="form-control"
+                formControlName="deadline"
+                type="textbox"
+              />
               <!-- <small *ngIf="submitted && loginForm.controls['username'].errors" class="text text-danger"> Please enter the username</small> -->
             </div>
           </div>

@@ -12,17 +12,5 @@ export class CategoryComponent implements OnInit {
   jobList: any;
   ngOnInit(): void {
     this.jobList = jobList;
-    for (const categoryItem of jobList) {
-      const { stageName, jobIdentifiers } = categoryItem;
-
-      console.log(`Stage: ${stageName}`);
-
-      // Iterate over job identifiers within the array
-      for (const jobId of jobIdentifiers) {
-        console.log(`  Job Identifier: ${jobId}`);
-      }
-    }
-    console.log('-------------------------------');
-    // console.log(this.category);
   }
 }
