@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { categoryList } from 'src/app/category';
+import { Job } from 'src/app/models/Job';
+import { HomeService } from 'src/app/services/home.service';
+import { JobService } from 'src/app/services/job.service';
 
 @Component({
   selector: 'app-home-modal',
@@ -12,8 +15,13 @@ export class HomeModalComponent implements OnInit {
   addJobForm: FormGroup;
   cgList: string[];
   submitted: boolean = false;
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private homeService: HomeService,
+    private jobService: JobService
+  ) {}
   ngOnInit(): void {
+    // later get it from homeService
     this.cgList = categoryList;
     this.addJobForm = new FormGroup({
       company: new FormControl('', [Validators.required]),
@@ -24,7 +32,7 @@ export class HomeModalComponent implements OnInit {
     });
   }
   closeModal(): void {
-    const modelDiv = document.getElementById('myModal');
+    // const modelDiv = document.getElementById('myModal');
     this.router.navigate(['home']);
   }
   onSubmit(): void {
@@ -35,7 +43,18 @@ export class HomeModalComponent implements OnInit {
     }
     let userData = this.addJobForm.value;
 
-    console.log(userData);
+    let jobData: Job = {
+      company: userData.company,
+      title: userData.title,
+      link: userData.link,
+      category: userData.category,
+      salary: userData.salary == undefined ? null : userData.salary,
+      deadline: userData.deadline == undefined ? null : userData.deadline,
+      comments: userData.comments,
+    };
+
+    console.log(jobData);
+    this.jobService.addJob(jobData);
     this.addJobForm.reset();
   }
 }

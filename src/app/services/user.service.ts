@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, Subject, map, catchError, BehaviorSubject } from 'rxjs';
-import { User } from '../User';
+import { User } from '../models/User';
 import { CookieService } from '../config/cookie.service';
 
 @Injectable({

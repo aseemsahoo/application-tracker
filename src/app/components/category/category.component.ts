@@ -8,7 +8,7 @@ import { jobList } from 'src/app/jobs';
 })
 export class CategoryComponent implements OnInit {
   @Input() category: string;
-  @Input() job: string;
+  // @Input() job: string;
   jobList: any;
   ngOnInit(): void {
     this.jobList = jobList;

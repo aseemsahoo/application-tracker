@@ -33,7 +33,7 @@ import { JobModalComponent } from './components/job-modal/job-modal.component';
   ],
   imports: [
     BrowserModule,
-    RouterModule.forRoot(appRoutes),
+    RouterModule.forRoot(appRoutes, { enableTracing: false }),
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,

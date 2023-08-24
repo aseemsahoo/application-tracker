@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationExtras, Router } from '@angular/router';
+import { Job } from 'src/app/models/Job';
 
 @Component({
   selector: 'app-job',
@@ -9,11 +10,16 @@ import { Router } from '@angular/router';
 export class JobComponent implements OnInit {
   constructor(private router: Router) {}
   ngOnInit(): void {}
-  @Input() company: string;
+  // change it to Job type when you implement database bcoz i havent added details, salary, etc in mock array
+  @Input() object: string;
   onClick(): void {
-    console.log(this.company + 'clicked');
+    console.log(this.object);
   }
   openModal(): void {
-    this.router.navigate(['home/edit']);
+    const navigationExtras: NavigationExtras = {
+      state: { example: this.object },
+    };
+
+    this.router.navigate(['home/edit'], navigationExtras);
   }
 }
